@@ -5,7 +5,16 @@ require 'date'
 # Use the Seleniumwebdriver to retrieve data.
 class WebDriver
   def initialize()
-    @driver = Selenium::WebDriver.for :chrome
+    caps = Selenium::WebDriver::Remote::Capabilities.chrome("chromeOptions" => {
+      binary: '/usr/bin/chromium-browser',
+      args: [
+        "--no-sandbox",
+        "--headless",
+        "--disable-gpu",
+        "--window-size=320x240"
+      ]
+    })
+    @driver = Selenium::WebDriver.for :chrome, desired_capabilities: caps
   end
 
   def get_reservation_data()
