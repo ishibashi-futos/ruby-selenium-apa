@@ -18,26 +18,26 @@ class WebDriver
   end
 
   def get_reservation_data()
-    # apahotelの予約ページを開く
+    # open Booking page to apa hotel
     @driver.navigate.to 'https://www.apahotel.com/hotel/shutoken/tokyo_makuhari_bay/'
-    # calendar detailのデータを取得
+    # get calendar detail data
     calendar = @driver.find_elements(:class, 'cl-detail')
-    # nの値が"-"以外 ≒ 当月以外を取得
+    # non "-"
     calendar = calendar.map do |n|
       if n.text != '-'
         n.text
       end
     end
-    # 取得が完了したらwebdriverを終了する
+    # dispose webdriver
     dispose()
-    # nilを消す
+    # compact array
     calendar.compact!
 
-    # 戻り値となるハッシュを用意
+    # result hash data
     calendar_data = Hash.new
 
     calendar.each_with_index do |n, i|
-      # データを保存・・・なぜか2日からスタートなので+2。普段は+1でいいはず
+      # save data
       calendar_data.store(Date.new(2018, 12, i + 2).to_s, n)
     end
     calendar_data
