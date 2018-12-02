@@ -8,10 +8,11 @@ class WebDriver
     caps = Selenium::WebDriver::Remote::Capabilities.chrome("chromeOptions" => {
       binary: '/usr/bin/chromium-browser',
       args: [
-        "--no-sandbox",
-        "--headless",
-        "--disable-gpu",
-        "--window-size=320x240"
+        '--no-sandbox',
+        '--headless',
+        '--disable-gpu',
+        '--lang=ja',
+        '--window-size=320x240'
       ]
     })
     @driver = Selenium::WebDriver.for :chrome, desired_capabilities: caps
