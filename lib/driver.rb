@@ -2,13 +2,13 @@ require 'bundler/setup'
 require 'selenium-webdriver'
 require 'date'
 
+# Use the Seleniumwebdriver to retrieve data.
 class WebDriver
-
   def initialize()
     @driver = Selenium::WebDriver.for :chrome
   end
 
-  def getReservationData()
+  def get_reservation_data()
     # apahotelの予約ページを開く
     @driver.navigate.to 'https://www.apahotel.com/hotel/shutoken/tokyo_makuhari_bay/'
     # calendar detailのデータを取得
@@ -25,13 +25,13 @@ class WebDriver
     calendar.compact!
 
     # 戻り値となるハッシュを用意
-    calendarData = Hash.new
+    calendar_data = Hash.new
 
     calendar.each_with_index do |n, i|
       # データを保存・・・なぜか2日からスタートなので+2。普段は+1でいいはず
-      calendarData.store(Date.new(2018, 12, i + 2).to_s, n)
+      calendar_data.store(Date.new(2018, 12, i + 2).to_s, n)
     end
-    calendarData
+    calendar_data
   end
 
   def dispose()
